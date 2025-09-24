@@ -3,744 +3,1831 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+    <title>Clipwave - Free Video Sharing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --dark: #2E3440;
+            --light: #F8F9FA;
+            --gray: #ADB5BD;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
         }
-
-        /* Header Styles */
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
         header {
-            background-color: rgba(18, 18, 18, 0.95);
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        .header-content {
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--light);
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            padding: 0 1.2rem;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .user-actions button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
             text-decoration: none;
         }
-
-        .logo i {
-            color: var(--primary);
-            font-size: 28px;
+        
+        .btn-primary {
+            background-color: var(--dark);
+            color: white;
         }
-
-        .logo span {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
         }
-
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
         }
-
-        .btn {
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-        }
-
+        
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-primary {
-            background: var(--primary);
+            border: 2px solid white;
             color: white;
         }
-
+        
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 0, 80, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--primary);
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            display: flex;
-            min-height: calc(100vh - 70px);
-        }
-
-        .sidebar {
-            width: 80px;
-            padding: 20px 10px;
-            background-color: var(--card-bg);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-        }
-
-        .sidebar-menu li {
-            display: flex;
-            justify-content: center;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 10px;
-            transition: all 0.3s;
-            width: 50px;
-            height: 50px;
-        }
-
-        .sidebar-menu a:hover, .sidebar-menu a.active {
-            background-color: rgba(255, 0, 80, 0.1);
-            color: var(--primary);
-        }
-
-        .sidebar-menu i {
-            font-size: 20px;
-        }
-
-        .content {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Auth Forms */
-        .auth-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-        }
-
-        .auth-form {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .auth-form h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--light);
-            font-size: 16px;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 20px;
-            color: var(--gray);
-        }
-
-        .auth-footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .error-message {
-            color: #ff4d4d;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        /* Feed Styles */
-        .feed-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .feed-title {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
+        
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
-
+        
         .video-card {
-            background-color: var(--card-bg);
+            background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
         }
-
+        
         .video-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
-
-        .video-thumbnail {
+        
+        .video-thumbnail-container {
             position: relative;
-            height: 200px;
+            width: 100%;
+            height: 160px;
             overflow: hidden;
         }
-
-        .video-thumbnail img {
+        
+        .video-thumbnail {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
-
+        
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.05);
+        }
+        
         .video-duration {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-
-        .play-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .play-icon {
-            font-size: 50px;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0,0,0,0.7);
             color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
         }
-
-        .video-thumbnail:hover .play-overlay {
-            opacity: 1;
-        }
-
+        
         .video-info {
-            padding: 15px;
+            padding: 1rem;
         }
-
+        
         .video-title {
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        .video-stats {
+        
+        .video-meta {
             display: flex;
             justify-content: space-between;
             color: var(--gray);
-            font-size: 14px;
+            font-size: 0.9rem;
         }
-
-        /* Video Player Styles */
-        .video-player-container {
+        
+        /* Video Player Modal */
+        .video-player-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            display: none;
+            background-color: rgba(0,0,0,0.9);
+            display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 0;
+            display: none;
         }
-
-        .video-player {
+        
+        .video-player-container {
             width: 90%;
-            max-width: 800px;
+            max-width: 1200px;
             background-color: var(--dark);
             border-radius: 10px;
             overflow: hidden;
-            position: relative;
         }
-
-        .video-player video {
+        
+        .video-player-wrapper {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .quality-selector {
+            position: absolute;
+            bottom: 60px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+            z-index: 10;
+        }
+        
+        .quality-selector.show {
             display: block;
         }
-
-        .player-controls {
-            padding: 15px;
+        
+        .quality-option {
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .quality-option:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .quality-option.active {
+            background-color: var(--primary);
+        }
+        
+        .video-details {
+            padding: 1.5rem;
+            background-color: white;
+        }
+        
+        .video-details-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            margin-bottom: 1rem;
         }
-
-        .player-info h3 {
-            margin-bottom: 5px;
+        
+        .video-title-large {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
-
-        .player-info p {
+        
+        .video-views {
             color: var(--gray);
-            font-size: 14px;
+            font-size: 0.9rem;
         }
-
-        .close-player {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.5);
+        
+        .video-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gray);
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .action-btn:hover {
+            color: var(--primary);
+        }
+        
+        .action-btn.active {
+            color: var(--primary);
+        }
+        
+        .video-description {
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+        
+        .video-uploader-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .uploader-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .uploader-details {
+            flex-grow: 1;
+        }
+        
+        .uploader-name {
+            font-weight: 600;
+        }
+        
+        .uploader-subs {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .subscribe-btn {
+            background-color: var(--primary);
             color: white;
             border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .subscribe-btn.subscribed {
+            background-color: var(--gray);
+        }
+        
+        .recommendations {
+            margin-top: 2rem;
+        }
+        
+        .recommendations h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .close-player {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
             width: 40px;
             height: 40px;
             border-radius: 50%;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 20px;
         }
-
-        /* Edit Video Styles */
-        .edit-container {
-            display: flex;
-            gap: 30px;
-        }
-
-        .video-preview {
-            flex: 1;
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .preview-video {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            background-color: #000;
-            position: relative;
-        }
-
-        .preview-video video {
-            width: 100%;
-            display: block;
-            filter: brightness(1) contrast(1) saturate(1);
-        }
-
-        .edit-tools {
-            flex: 1;
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .tool-section {
-            margin-bottom: 25px;
-        }
-
-        .tool-section h3 {
-            margin-bottom: 15px;
-            font-size: 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 8px;
-        }
-
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .filter-option {
-            text-align: center;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        .filter-option:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .filter-option.active {
-            background-color: rgba(255, 0, 80, 0.2);
-            border: 1px solid var(--primary);
-        }
-
-        .filter-preview {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            margin: 0 auto 5px;
-            overflow: hidden;
-            background-color: #000;
-        }
-
-        .filter-preview img {
+        
+        /* Auth Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
         }
-
-        .slider-container {
-            margin-bottom: 15px;
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
         }
-
-        .slider-label {
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .auth-tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-actions {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px;
+            align-items: center;
+            margin-top: 2rem;
         }
-
-        .slider {
-            width: 100%;
-            height: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-        }
-
-        .save-video-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            transition: transform 0.3s;
-        }
-
-        .save-video-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .upload-section {
+        
+        .form-footer {
             text-align: center;
-            margin: 30px 0;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
         }
-
-        .upload-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: var(--primary);
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
         }
-
-        .upload-btn:hover {
-            background: #ff1a66;
-            transform: translateY(-2px);
+        
+        /* Upload Modal */
+        .upload-modal .modal-content {
+            max-width: 600px;
         }
-
-        #fileInput {
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .file-info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .upload-progress {
+            margin: 1.5rem 0;
             display: none;
         }
-
-        /* Responsive Styles */
+        
+        .progress-bar {
+            height: 10px;
+            background-color: var(--primary);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            display: block;
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .upload-status {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        /* Loading state */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--gray);
+        }
+        
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1100;
+            max-width: 300px;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast.success {
+            background-color: var(--success);
+        }
+        
+        .toast.error {
+            background-color: var(--danger);
+        }
+        
         @media (max-width: 768px) {
-            .edit-container {
+            .nav-container {
                 flex-direction: column;
+                gap: 1rem;
             }
             
-            .video-grid {
-                grid-template-columns: 1fr;
+            .search-bar {
+                width: 100%;
             }
             
-            .sidebar {
-                width: 60px;
-                padding: 10px 5px;
-            }
-            
-            .sidebar-menu a {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .video-player {
+            .video-player-container {
                 width: 95%;
+            }
+            
+            .video-details-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .video-actions {
+                width: 100%;
+                justify-content: space-between;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <i class="fas fa-play-circle"></i>
-                    <span>ClipWave</span>
-                </a>
-                
-                <div class="auth-buttons" id="authButtons">
-                    <button class="btn btn-outline" id="loginBtn">Log In</button>
-                    <button class="btn btn-primary" id="signupBtn">Sign Up</button>
-                </div>
-                
-                <div class="user-info" id="userInfo" style="display: none;">
-                    <div class="user-avatar">
-                        <img src="https://i.pravatar.cc/150?img=5" alt="User Avatar" id="userAvatar">
-                    </div>
-                    <span id="usernameDisplay">User</span>
-                    <button class="btn btn-outline" id="logoutBtn">Log Out</button>
-                </div>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-play-circle"></i>
+                <span>Clipwave</span>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for videos..." id="search-input">
+                <button id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="user-actions" id="user-actions">
+                <!-- Dynamically populated based on auth state -->
+                <button title="Upload" id="open-upload-modal"><i class="fas fa-upload"></i></button>
+                <button title="Account" id="auth-button"><i class="fas fa-user-circle"></i></button>
             </div>
         </div>
     </header>
-
-    <!-- Video Player Modal -->
-    <div class="video-player-container" id="videoPlayerModal">
-        <div class="video-player">
-            <button class="close-player" id="closePlayer">
-                <i class="fas fa-times"></i>
-            </button>
-            <video id="fullscreenVideo" controls autoplay>
-                Your browser does not support the video tag.
-            </video>
-            <div class="player-controls">
-                <div class="player-info">
-                    <h3 id="playerTitle">Video Title</h3>
-                    <p id="playerUser">@username</p>
+    
+    <div class="container">
+        <div class="hero" id="hero-section">
+            <h1>Watch & Share Free Videos</h1>
+            <p>Join our community of video creators! Upload your favorite videos, discover new ones, and enjoy endless entertainment.</p>
+            <button class="btn btn-primary" id="open-upload-modal-btn">Upload Your Video</button>
+            <button class="btn btn-outline" id="auth-button-hero" style="margin-left: 10px;">Login / Signup</button>
+        </div>
+        
+        <div id="content-area">
+            <h2>Trending Now</h2>
+            <div class="video-grid" id="video-grid">
+                <!-- Videos will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Auth Modals -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="login-tab">Login</div>
+                <div class="auth-tab" id="signup-tab">Sign Up</div>
+            </div>
+            
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
                 </div>
-                <div class="player-stats">
-                    <span><i class="fas fa-eye"></i> <span id="playerViews">0</span></span>
-                    <span><i class="fas fa-heart"></i> <span id="playerLikes">0</span></span>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="login-submit">Login</button>
+                    <a href="#" id="forgot-password">Forgot password?</a>
+                </div>
+                <div class="form-footer">
+                    Don't have an account? <a href="#" id="switch-to-signup">Sign up</a>
+                </div>
+            </form>
+            
+            <form id="signup-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="signup-submit">Sign Up</button>
+                </div>
+                <div class="form-footer">
+                    Already have an account? <a href="#" id="switch-to-login">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Upload Modal -->
+    <div class="modal upload-modal" id="upload-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Upload Video</h2>
+            <form id="upload-form">
+                <div class="form-group">
+                    <label for="video-title">Video Title</label>
+                    <input type="text" id="video-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="video-description">Description</label>
+                    <textarea id="video-description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="video-file">Select Video File</label>
+                    <input type="file" id="video-file" accept="video/*" required>
+                    <div class="file-info" id="file-info">No file selected</div>
+                </div>
+                <div class="form-group">
+                    <label for="thumbnail-file">Thumbnail (optional)</label>
+                    <input type="file" id="thumbnail-file" accept="image/*">
+                    <div class="file-info" id="thumbnail-info">No thumbnail selected</div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="upload-submit">Upload Video</button>
+                <div class="upload-progress" id="upload-progress">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <span class="progress-text" id="progress-text">0%</span>
+                </div>
+                <div class="upload-status" id="upload-status"></div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Video Player Modal -->
+    <div class="video-player-modal" id="video-player-modal">
+        <span class="close-player" id="close-player">&times;</span>
+        
+        <div class="video-player-container">
+            <div class="video-player-wrapper">
+                <video controls class="video-player" id="video-player">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="quality-selector" id="quality-selector">
+                    <div class="quality-option" data-quality="auto">Auto</div>
+                    <div class="quality-option" data-quality="720">720p</div>
+                    <div class="quality-option" data-quality="480">480p</div>
+                    <div class="quality-option" data-quality="360">360p</div>
+                </div>
+            </div>
+            
+            <div class="video-details">
+                <div class="video-details-header">
+                    <div>
+                        <h1 class="video-title-large" id="video-title-large">Funny Cat Video Compilation</h1>
+                        <span class="video-views" id="video-views">1.2M views • 2 weeks ago</span>
+                    </div>
+                    
+                    <div class="video-actions">
+                        <button class="action-btn" title="Like" id="like-btn"><i class="fas fa-thumbs-up"></i> <span id="like-count">24K</span></button>
+                        <button class="action-btn" title="Dislike" id="dislike-btn"><i class="fas fa-thumbs-down"></i></button>
+                        <button class="action-btn" title="Save" id="save-btn"><i class="fas fa-bookmark"></i> <span>Save</span></button>
+                    </div>
+                </div>
+                
+                <div class="video-description" id="video-description">
+                    This hilarious cat video compilation features the funniest moments from our favorite feline characters. Perfect for kids and adults alike! Don't forget to like and subscribe for more video content.
+                </div>
+                
+                <div class="video-uploader-info">
+                    <div class="uploader-avatar" id="uploader-avatar">VL</div>
+                    <div class="uploader-details">
+                        <div class="uploader-name">VideoLover123</div>
+                        <div class="uploader-subs">245K subscribers</div>
+                    </div>
+                    <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>More Videos You Might Like</h3>
+                    <div class="video-grid" id="recommendations-grid">
+                        <!-- Recommendations will be loaded here -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Clipwave</div>
+                <p>The best place to watch and share free videos with the community.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Popular Videos</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">Classic Videos</a></li>
+                    <li><a href="#">Categories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Copyright</a></li>
+                    <li><a href="#">Community Guidelines</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Clipwave. All rights reserved.
+        </div>
+    </footer>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar" style="display: none;">
-            <ul class="sidebar-menu">
-                <li><a href="#" class="active" data-page="home"><i class="fas fa-home"></i></a></li>
-                <li><a href="#" data-page="explore"><i class="fas fa-compass"></i></a></li>
-                <li><a href="#" data-page="create"><i class="fas fa-plus-circle"></i></a></li>
-                <li><a href="#" data-page="profile"><i class="fas fa-user"></i></a></li>
-            </ul>
-        </aside>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
-        <!-- Content Area -->
-        <main class="content">
-            <!-- Home Page -->
-            <section id="home" class="page active">
-                <div class="feed-header">
-                    <h2 class="feed-title">For You</h2>
-                </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const videoGrid = document.getElementById('video-grid');
+            const videoPlayerModal = document.getElementById('video-player-modal');
+            const videoPlayer = document.getElementById('video-player');
+            const closePlayer = document.getElementById('close-player');
+            const videoTitleLarge = document.getElementById('video-title-large');
+            const videoViews = document.getElementById('video-views');
+            const videoDescription = document.getElementById('video-description');
+            const recommendationsGrid = document.getElementById('recommendations-grid');
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const qualitySelector = document.getElementById('quality-selector');
+            const uploaderAvatar = document.getElementById('uploader-avatar');
+            
+            // Auth elements
+            const authModal = document.getElementById('auth-modal');
+            const loginTab = document.getElementById('login-tab');
+            const signupTab = document.getElementById('signup-tab');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const switchToSignup = document.getElementById('switch-to-signup');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const authButton = document.getElementById('auth-button');
+            const authButtonHero = document.getElementById('auth-button-hero');
+            const userActions = document.getElementById('user-actions');
+            
+            // Upload modal elements
+            const uploadModal = document.getElementById('upload-modal');
+            const openUploadModalBtn = document.getElementById('open-upload-modal-btn');
+            const openUploadModalIcon = document.getElementById('open-upload-modal');
+            const closeUploadModal = document.querySelector('.upload-modal .close-modal');
+            const uploadForm = document.getElementById('upload-form');
+            const videoFileInput = document.getElementById('video-file');
+            const thumbnailFileInput = document.getElementById('thumbnail-file');
+            const fileInfo = document.getElementById('file-info');
+            const thumbnailInfo = document.getElementById('thumbnail-info');
+            const uploadProgress = document.getElementById('upload-progress');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const uploadStatus = document.getElementById('upload-status');
+            
+            // Toast notification
+            const toast = document.getElementById('toast');
+            
+            // App state
+            let currentUser = null;
+            let videos = [];
+            let currentVideo = null;
+            
+            // Sample video data (will be replaced with user-specific data when logged in)
+            const sampleVideos = [
+                {
+                    id: 1,
+                    title: "Funny Cat Video Compilation",
+                    uploader: "VideoLover123",
+                    thumbnail: "https://source.unsplash.com/random/300x180/?cat",
+                    videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+                    videoUrls: {
+                        '720': "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+                        '480': "https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_1mb.mp4",
+                        '360': "https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_1mb.mp4"
+                    },
+                    views: "1.2M",
+                    uploadDate: "2 weeks ago",
+                    likes: 24000,
+                    liked: false,
+                    disliked: false,
+                    saved: false,
+                    description: "This hilarious cat video compilation features the funniest moments from our favorite feline characters. Perfect for kids and adults alike! Don't forget to like and subscribe for more video content.",
+                    duration: "10:24",
+                    uploaderInitials: "VL",
+                    subscribers: 245000,
+                    subscribed: false
+                },
+                {
+                    id: 2,
+                    title: "Adventure Time: Best Moments Season 5",
+                    uploader: "AdventureFan",
+                    thumbnail: "https://source.unsplash.com/random/300x180/?adventure",
+                    videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4",
+                    videoUrls: {
+                        '720': "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4",
+                        '480': "https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_1mb.mp4",
+                        '360': "https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_1mb.mp4"
+                    },
+                    views: "856K",
+                    uploadDate: "1 month ago",
+                    likes: 42000,
+                    liked: false,
+                    disliked: false,
+                    saved: false,
+                    description: "Relive the best moments from Adventure Time Season 5 in this special compilation. Finn and Jake's most epic adventures all in one place!",
+                    duration: "15:42",
+                    uploaderInitials: "AF",
+                    subscribers: 120000,
+                    subscribed: false
+                },
+                {
+                    id: 3,
+                    title: "Classic Mickey Mouse: Steamboat Willie",
+                    uploader: "DisneyForever",
+                    thumbnail: "https://source.unsplash.com/random/300x180/?mickey,mouse",
+                    videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_5mb.mp4",
+                    videoUrls: {
+                        '720': "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_5mb.mp4",
+                        '480': "https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_2mb.mp4",
+                        '360': "https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_1mb.mp4"
+                    },
+                    views: "3.5M",
+                    uploadDate: "6 months ago",
+                    likes: 198000,
+                    liked: false,
+                    disliked: false,
+                    saved: false,
+                    description: "The classic that started it all! Enjoy Steamboat Willie in high definition remastered version.",
+                    duration: "7:32",
+                    uploaderInitials: "DF",
+                    subscribers: 850000,
+                    subscribed: false
+                },
+                {
+                    id: 4,
+                    title: "Tom & Jerry: The Ultimate Chase",
+                    uploader: "ClassicToons",
+                    thumbnail: "https://source.unsplash.com/random/300x180/?tom,jerry",
+                    videoUrl: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
+                    videoUrls: {
+                        '720': "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
+                        '480': "https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_5mb.mp4",
+                        '360': "https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_2mb.mp4"
+                    },
+                    views: "5.7M",
+                    uploadDate: "1 year ago",
+                    likes: 320000,
+                    liked: false,
+                    disliked: false,
+                    saved: false,
+                    description: "Watch Tom and Jerry's most epic chases in this 30-minute compilation of their best moments.",
+                    duration: "28:15",
+                    uploaderInitials: "CT",
+                    subscribers: 1200000,
+                    subscribed: false
+                }
+            ];
+            
+            // Initialize the page
+            initApp();
+            
+            // Initialize the application
+            function initApp() {
+                // Check if user is logged in from localStorage
+                const user = localStorage.getItem('currentUser');
+                if (user) {
+                    currentUser = JSON.parse(user);
+                    updateAuthUI();
+                }
                 
-                <div class="video-grid" id="homeVideoGrid">
-                    <!-- Video cards will be dynamically generated -->
-                </div>
-            </section>
-
-            <!-- Explore Page -->
-            <section id="explore" class="page">
-                <div class="feed-header">
-                    <h2 class="feed-title">Explore</h2>
-                </div>
+                // Load videos
+                loadVideos();
+            }
+            
+            // Load videos based on auth state
+            function loadVideos() {
+                // For logged in users, show their videos + sample videos
+                // For guests, show sample videos
+                videos = [...sampleVideos];
                 
-                <div class="video-grid" id="exploreVideoGrid">
-                    <!-- Video cards will be dynamically generated -->
-                </div>
-            </section>
-
-            <!-- Create/Edit Page -->
-            <section id="create" class="page">
-                <h2 class="feed-title">Edit Your Video</h2>
+                // Load user's videos from localStorage if logged in
+                if (currentUser) {
+                    const userVideos = localStorage.getItem(`userVideos_${currentUser.id}`);
+                    if (userVideos) {
+                        const parsedVideos = JSON.parse(userVideos);
+                        videos = [...parsedVideos, ...videos];
+                    }
+                }
                 
-                <div class="upload-section">
-                    <label for="fileInput" class="upload-btn">
-                        <i class="fas fa-upload"></i> Upload Video
-                    </label>
-                    <input type="file" id="fileInput" accept="video/*">
-                    <p style="margin-top: 10px; color: var(--gray);">Select a video file to upload and edit</p>
-                </div>
+                displayVideos(videos, videoGrid);
+            }
+            
+            // Show empty state
+            function showEmptyState() {
+                const contentArea = document.getElementById('content-area');
+                contentArea.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-video-slash"></i>
+                        <h3>No Videos Yet</h3>
+                        <p>You haven't uploaded any videos yet. Click the button below to get started!</p>
+                        <button class="btn btn-primary" id="open-upload-modal-btn">Upload Your First Video</button>
+                    </div>
+                `;
                 
-                <div class="edit-container">
-                    <div class="video-preview">
-                        <h3>Preview</h3>
-                        <div class="preview-video">
-                            <video id="videoPlayer" controls>
-                                Your browser does not support the video tag.
-                            </video>
+                // Reattach event listener
+                document.getElementById('open-upload-modal-btn').addEventListener('click', showUploadModal);
+            }
+            
+            // Display videos in grid
+            function displayVideos(videos, container) {
+                container.innerHTML = '';
+                
+                if (videos.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-search"></i>
+                            <h3>No Videos Found</h3>
+                            <p>Try a different search term or upload your own content.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                videos.forEach(video => {
+                    const videoCard = document.createElement('div');
+                    videoCard.className = 'video-card';
+                    videoCard.innerHTML = `
+                        <div class="video-thumbnail-container">
+                            <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">
+                            <span class="video-duration">${video.duration}</span>
                         </div>
                         <div class="video-info">
-                            <h4 id="previewTitle">My Awesome Video</h4>
-                            <p id="previewDescription">This is a description of my video</p>
-                        </div>
-                    </div>
-                                        <div style="width:100%;height:100%;background:linear-gradient(45deg, #4B0082, #8A2BE2)"></div>
-                                    </div>
-                                    <span>Dramatic</span>
-                                </div>
-                                <div class="filter-option" data-filter="cinematic">
-                                    <div class="filter-preview">
-                                        <div style="width:100%;height:100%;background:linear-gradient(45deg, #000, #333)"></div>
-                                    </div>
-                                    <span>Cinematic</span>
-                                </div>
+                            <h3 class="video-title">${video.title}</h3>
+                            <div class="video-meta">
+                                <span>${video.uploader}</span>
+                                <span>${video.views} views</span>
                             </div>
                         </div>
-                        
-                        <div class="tool-section">
-                            <h3>Adjustments</h3>
-                            <div class="slider-container">
-                                <div class="slider-label">
-                                    <span>Brightness</span>
-                                    <span id="brightnessValue">100%</span>
-                                </div>
-                                <input type="range" min="0" max="200" value="100" class="slider" id="brightnessSlider">
-                            </div>
-                            
-               
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value" id="followerCount">1.2M</div>
-                                <div class="stat-label">Followers</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value" id="videoCount">56</div>
-                                <div class="stat-label">Videos</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value" id="likeCount">4.5M</div>
-                                <div class="stat-label">Likes</div>
-                            </div>
-                        </div>
-                        
-                        <div class="profile-bio" id="profileBio">
-                            Digital creator | Love making fun videos | Follow for daily content!
-                        </div>
-                    </div>
-                </div>
+                    `;
+                    
+                    videoCard.addEventListener('click', () => {
+                        openVideoPlayer(video);
+                    });
+                    
+                    container.appendChild(videoCard);
+                });
+            }
+            
+            // Open video player with selected video
+            function openVideoPlayer(video) {
+                currentVideo = video;
                 
-                <div class="feed-header">
-                    <h2 class="feed-title">My Videos</h2>
-                </div>
+                // Set video source based on current quality (default to auto)
+                videoPlayer.src = video.videoUrl;
                 
-                <div class="video-grid" id="profileVideoGrid">
-                    <!-- Video cards will be dynamically generated -->
-                </div>
-            </section>
-
-            <!-- Login Page -->
-            <section id="login" class="page">
-                <div class="auth-container">
-                    <
-                        <h2>Sign Up</h2>
-                        <div class="form-group">
-                            <label for="signupUsername">Username</label>
-                            <input type="text" id="sign
+                // Update video info
+                videoTitleLarge.textContent = video.title;
+                videoViews.textContent = `${video.views} views • ${video.uploadDate}`;
+                videoDescription.textContent = video.description;
+                
+                // Update like/dislike/save buttons
+                updateVideoActions();
+                
+                // Update uploader info
+                uploaderAvatar.textContent = video.uploaderInitials;
+                document.querySelector('.uploader-name').textContent = video.uploader;
+                document.querySelector('.uploader-subs').textContent = `${formatNumber(video.subscribers)} subscribers`;
+                
+                // Update subscribe button
+                const subscribeBtn = document.getElementById('subscribe-btn');
+                subscribeBtn.textContent = video.subscribed ? 'Subscribed' : 'Subscribe';
+                subscribeBtn.classList.toggle('subscribed', video.subscribed);
+                
+                // Load recommendations (exclude current video)
+                const recommendations = videos.filter(v => v.id !== video.id).slice(0, 4);
+                displayVideos(recommendations, recommendationsGrid);
+                
+                // Show modal
+                videoPlayerModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                
+                // Play video
+                videoPlayer.play().catch(e => {
+                    console.error('Autoplay prevented:', e);
+                    showToast('Click on the video to start playback', 'error');
+                });
+            }
+            
+            // Update video action buttons (like, dislike, save)
+            function updateVideoActions() {
+                if (!currentVideo) return;
+                
+                const likeBtn = document.getElementById('like-btn');
+                const dislikeBtn = document.getElementById('dislike-btn');
+                const saveBtn = document.getElementById('save-btn');
+                const likeCount = document.getElementById('like-count');
+                
+                likeBtn.classList.toggle('active', currentVideo.liked);
+                dislikeBtn.classList.toggle('active', currentVideo.disliked);
+                saveBtn.classList.toggle('active', currentVideo.saved);
+                likeCount.textContent = formatNumber(currentVideo.likes);
+            }
+            
+            // Close video player
+            function closeVideoPlayer() {
+                videoPlayer.pause();
+                videoPlayerModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                currentVideo = null;
+            }
+            
+            // Show upload modal (with auth check)
+            function showUploadModal() {
+                if (!currentUser) {
+                    showAuthModal();
+                    showToast('Please login to upload videos', 'error');
+                    return;
+                }
+                
+                uploadModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close upload modal
+            function closeUploadModalHandler() {
+                uploadModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Show auth modal
+            function showAuthModal(activeTab = 'login') {
+                authModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                if (activeTab === 'login') {
+                    switchAuthTab('login');
+                } else {
+                    switchAuthTab('signup');
+                }
+            }
+            
+            // Close auth modal
+            function closeAuthModal() {
+                authModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Switch between login and signup tabs
+            function switchAuthTab(tab) {
+                if (tab === 'login') {
+                    loginTab.classList.add('active');
+                    signupTab.classList.remove('active');
+                    loginForm.style.display = 'block';
+                    signupForm.style.display = 'none';
+                } else {
+                    loginTab.classList.remove('active');
+                    signupTab.classList.add('active');
+                    loginForm.style.display = 'none';
+                    signupForm.style.display = 'block';
+                }
+            }
+            
+            // Update UI based on auth state
+            function updateAuthUI() {
+                if (currentUser) {
+                    // User is logged in
+                    authButton.innerHTML = `<i class="fas fa-user-circle"></i>`;
+                    authButtonHero.style.display = 'none';
+                    
+                    // Enable upload buttons
+                    openUploadModalBtn.disabled = false;
+                    openUploadModalIcon.disabled = false;
+                    
+                    // Update hero text for logged in users
+                    document.querySelector('.hero h1').textContent = `Welcome back, ${currentUser.name.split(' ')[0]}!`;
+                    document.querySelector('.hero p').textContent = 'Ready to upload your next video or discover new ones?';
+                    
+                    // Load user's videos
+                    loadVideos();
+                } else {
+                    // User is not logged in
+                    authButton.innerHTML = '<i class="fas fa-user-circle"></i>';
+                    authButtonHero.style.display = 'inline-block';
+                    
+                    // Disable upload buttons
+                    openUploadModalBtn.disabled = true;
+                    openUploadModalIcon.disabled = true;
+                    
+                    // Reset hero text
+                    document.querySelector('.hero h1').textContent = 'Watch & Share Free Videos';
+                    document.querySelector('.hero p').textContent = 'Join our community of video creators! Upload your favorite videos, discover new ones, and enjoy endless entertainment.';
+                    
+                    // Load sample videos
+                    loadVideos();
+                }
+            }
+            
+            // Format file size
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            // Format large numbers
+            function formatNumber(num) {
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1) + 'M';
+                } else if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'K';
+                }
+                return num.toString();
+            }
+            
+            // Show toast notification
+            function showToast(message, type = '') {
+                toast.textContent = message;
+                toast.className = 'toast';
+                toast.classList.add(type);
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Handle login form submission
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Simple validation
+                if (!email || !password) {
+                    showToast('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                // Simulate login (in a real app, this would be an API call)
+                setTimeout(() => {
+                    // For demo purposes, create a user
+                    currentUser = {
+                        id: 1,
+                        name: 'Demo User',
+                        email: email,
+                        initials: 'DU'
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Update UI
+                    updateAuthUI();
+                    
+                    // Close modal
+                    closeAuthModal();
+                    
+                    showToast('Login successful!', 'success');
+                }, 1000);
+            });
+            
+            // Handle signup form submission
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm-password').value;
+                
+                // Validation
+                if (!name || !email || !password || !confirmPassword) {
+                    showToast('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showToast('Passwords do not match', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showToast('Password must be at least 6 characters', 'error');
+                    return;
+                }
+                
+                // Get initials from name
+                const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+                
+                // Simulate signup (in a real app, this would be an API call)
+                setTimeout(() => {
+                    // For demo purposes, create a user
+                    currentUser = {
+                        id: Date.now(), // Use timestamp as unique ID
+                        name: name,
+                        email: email,
+                        initials: initials
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Update UI
+                    updateAuthUI();
+                    
+                    // Close modal
+                    closeAuthModal();
+                    
+                    showToast('Account created successfully!', 'success');
+                }, 1500);
+            });
+            
+            // Handle logout
+            function handleLogout() {
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                updateAuthUI();
+                showToast('Logged out successfully', 'success');
+            }
+            
+            // Handle upload form submission
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const title = document.getElementById('video-title').value;
+                const description = document.getElementById('video-description').value;
+                const videoFile = videoFileInput.files[0];
+                const thumbnailFile = thumbnailFileInput.files[0];
+                
+                if (!videoFile) {
+                    uploadStatus.textContent = 'Please select a video file';
+                    uploadStatus.style.color = 'red';
+                    return;
+                }
+                
+                // Validate file size (100MB limit)
+                const maxSize = 100 * 1024 * 1024;
+                if (videoFile.size > maxSize) {
+                    uploadStatus.textContent = 'Video file is too large (max 100MB)';
+                    uploadStatus.style.color = 'red';
+                    return;
+                }
+                
+                // Validate file type
+                if (!videoFile.type.startsWith('video/')) {
+                    uploadStatus.textContent = 'Please select a valid video file';
+                    uploadStatus.style.color = 'red';
+                    return;
+                }
+                
+                try {
+                    // Show upload progress
+                    uploadProgress.style.display = 'block';
+                    uploadStatus.textContent = 'Uploading...';
+                    uploadStatus.style.color = 'var(--primary)';
+                    
+                    // Simulate upload (replace with real AJAX in production)
+                    await simulateUpload(videoFile);
+                    
+                    // On successful upload
+                    uploadStatus.textContent = 'Upload complete!';
+                    uploadStatus.style.color = 'green';
+                    
+                    // Create a new video object (simulating server response)
+                    const newVideo = {
+                        id: Date.now(), // Use timestamp as unique ID
+                        title: title,
+                        uploader: currentUser.name,
+                        thumbnail: thumbnailFile ? URL.createObjectURL(thumbnailFile) : "https://source.unsplash.com/random/300x180/?video",
+                        videoUrl: URL.createObjectURL(videoFile),
+                        videoUrls: {
+                            '720': URL.createObjectURL(videoFile),
+                            '480': URL.createObjectURL(videoFile),
+                            '360': URL.createObjectURL(videoFile)
+                        },
+                        views: "0",
+                        uploadDate: "Just now",
+                        likes: 0,
+                        liked: false,
+                        disliked: false,
+                        saved: false,
+                        description: description,
+                        duration: "5:00", // In a real app, get from video metadata
+                        uploaderInitials: currentUser.initials,
+                        subscribers: 0,
+                        subscribed: false
+                    };
+                    
+                    // Save the video to localStorage
+                    saveUserVideo(newVideo);
+                    
+                    // Add to the beginning of the videos array
+                    videos.unshift(newVideo);
+                    displayVideos(videos, videoGrid);
+                    
+                    // Reset form
+                    uploadForm.reset();
+                    fileInfo.textContent = 'No file selected';
+                    thumbnailInfo.textContent = 'No thumbnail selected';
+                    progressBar.style.width = '0%';
+                    progressText.textContent = '0%';
+                    
+                    // Hide modal after 2 seconds
+                    setTimeout(() => {
+                        closeUploadModalHandler();
+                        uploadProgress.style.display = 'none';
+                        uploadStatus.textContent = '';
+                    }, 2000);
+                    
+                    showToast('Video uploaded successfully!', 'success');
+                    
+                } catch (error) {
+                    uploadStatus.textContent = 'Upload failed: ' + error.message;
+                    uploadStatus.style.color = 'red';
+                    showToast('Upload failed. Please try again.', 'error');
+                }
+            });
+            
+            // Save user video to localStorage
+            function saveUserVideo(video) {
+                if (!currentUser) return;
+                
+                const userVideosKey = `userVideos_${currentUser.id}`;
+                let userVideos = localStorage.getItem(userVideosKey);
+                
+                if (userVideos) {
+                    userVideos = JSON.parse(userVideos);
+                    userVideos.unshift(video);
+                } else {
+                    userVideos = [video];
+                }
+                
+                localStorage.setItem(userVideosKey, JSON.stringify(userVideos));
+            }
+            
+            // Simulate upload with progress
+            function simulateUpload(file) {
+                return new Promise((resolve, reject) => {
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += Math.random() * 10;
+                        if (progress >= 100) {
+                            progress = 100;
+                            clearInterval(interval);
+                            setTimeout(resolve, 500);
+                        }
+                        
+                        // Update progress
+                        progressBar.style.width = `${progress}%`;
+                        progressText.textContent = `${Math.round(progress)}%`;
+                    }, 200);
+                });
+            }
+            
+            // Event listeners for file inputs
+            videoFileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    fileInfo.textContent = `${file.name} (${formatFileSize(file.size)})`;
+                    
+                    // Validate file type
+                    if (!file.type.startsWith('video/')) {
+                        fileInfo.textContent += ' - Invalid file type';
+                        fileInfo.style.color = 'red';
+                        videoFileInput.value = '';
+                    } else {
+                        fileInfo.style.color = 'var(--gray)';
+                    }
+                } else {
+                    fileInfo.textContent = 'No file selected';
+                    fileInfo.style.color = 'var(--gray)';
+                }
+            });
+            
+            thumbnailFileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    thumbnailInfo.textContent = `${file.name} (${formatFileSize(file.size)})`;
+                    
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        thumbnailInfo.textContent += ' - Invalid file type';
+                        thumbnailInfo.style.color = 'red';
+                        thumbnailFileInput.value = '';
+                    } else {
+                        thumbnailInfo.style.color = 'var(--gray)';
+                    }
+                } else {
+                    thumbnailInfo.textContent = 'No thumbnail selected';
+                    thumbnailInfo.style.color = 'var(--gray)';
+                }
+            });
+            
+            // Search functionality
+            searchButton.addEventListener('click', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm) {
+                    const filteredVideos = videos.filter(video => 
+                        video.title.toLowerCase().includes(searchTerm) || 
+                        video.uploader.toLowerCase().includes(searchTerm)
+                    );
+                    displayVideos(filteredVideos, videoGrid);
+                } else {
+                    displayVideos(videos, videoGrid);
+                }
+            });
+            
+            // Video quality selection
+            videoPlayer.addEventListener('play', () => {
+                // In a real app, this would monitor network conditions and adjust quality
+                // For demo, we'll just show the quality selector
+                const qualityBtn = document.createElement('div');
+                qualityBtn.className = 'action-btn';
+                qualityBtn.innerHTML = '<i class="fas fa-cog"></i> <span>Quality</span>';
+                qualityBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    qualitySelector.classList.toggle('show');
+                });
+                
+                document.querySelector('.video-actions').prepend(qualityBtn);
+                
+                // Handle quality selection
+                document.querySelectorAll('.quality-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const quality = option.dataset.quality;
+                        
+                        // Update active state
+                        document.querySelectorAll('.quality-option').forEach(opt => {
+                            opt.classList.remove('active');
+                        });
+                        option.classList.add('active');
+                        
+                        // Change video source if not auto
+                        if (quality !== 'auto' && currentVideo.videoUrls[quality]) {
+                            const currentTime = videoPlayer.currentTime;
+                            videoPlayer.src = currentVideo.videoUrls[quality];
+                            videoPlayer.currentTime = currentTime;
+                            videoPlayer.play();
+                        }
+                        
+                        qualitySelector.classList.remove('show');
+                    });
+                });
+            });
+            
+            // Video player controls
+            document.getElementById('like-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!currentUser) {
+                    showAuthModal();
+                    showToast('Please login to like videos', 'error');
+                    return;
+                }
+                
+                if (currentVideo.liked) {
+                    currentVideo.likes--;
+                    currentVideo.liked = false;
+                } else {
+                    currentVideo.likes++;
+                    currentVideo.liked = true;
+                    if (currentVideo.disliked) {
+                        currentVideo.disliked = false;
+                        document.getElementById('dislike-btn').classList.remove('active');
+                    }
+                }
+                
+                updateVideoActions();
+            });
+            
+            document.getElementById('dislike-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!currentUser) {
+                    showAuthModal();
+                    showToast('Please login to dislike videos', 'error');
+                    return;
+                }
+                
+                currentVideo.disliked = !currentVideo.disliked;
+                if (currentVideo.disliked && currentVideo.liked) {
+                    currentVideo.likes--;
+                    currentVideo.liked = false;
+                    document.getElementById('like-btn').classList.remove('active');
+                }
+                
+                updateVideoActions();
+            });
+            
+            document.getElementById('save-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!currentUser) {
+                    showAuthModal();
+                    showToast('Please login to save videos', 'error');
+                    return;
+                }
+                
+                currentVideo.saved = !currentVideo.saved;
+                updateVideoActions();
+                showToast(currentVideo.saved ? 'Video saved to your library' : 'Video removed from your library');
+            });
+            
+            document.getElementById('subscribe-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!currentUser) {
+                    showAuthModal();
+                    showToast('Please login to subscribe', 'error');
+                    return;
+                }
+                
+                currentVideo.subscribed = !currentVideo.subscribed;
+                const btn = document.getElementById('subscribe-btn');
+                btn.textContent = currentVideo.subscribed ? 'Subscribed' : 'Subscribe';
+                btn.classList.toggle('subscribed', currentVideo.subscribed);
+                
+                if (currentVideo.subscribed) {
+                    currentVideo.subscribers++;
+                } else {
+                    currentVideo.subscribers--;
+                }
+                
+                document.querySelector('.uploader-subs').textContent = `${formatNumber(currentVideo.subscribers)} subscribers`;
+                showToast(currentVideo.subscribed ? `Subscribed to ${currentVideo.uploader}` : `Unsubscribed from ${currentVideo.uploader}`);
+            });
+            
+            // Auth tab switching
+            loginTab.addEventListener('click', () => switchAuthTab('login'));
+            signupTab.addEventListener('click', () => switchAuthTab('signup'));
+            switchToSignup.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchAuthTab('signup');
+            });
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchAuthTab('login');
+            });
+            
+            // Auth button click
+            authButton.addEventListener('click', () => {
+                if (currentUser) {
+                    // Show user menu (in a real app, this would be a dropdown)
+                    if (confirm('Do you want to logout?')) {
+                        handleLogout();
+                    }
+                } else {
+                    showAuthModal();
+                }
+            });
+            
+            authButtonHero.addEventListener('click', () => {
+                showAuthModal();
+            });
+            
+            // Event listeners for modals
+            closePlayer.addEventListener('click', closeVideoPlayer);
+            videoPlayerModal.addEventListener('click', (e) => {
+                if (e.target === videoPlayerModal) {
+                    closeVideoPlayer();
+                }
+            });
+            
+            openUploadModalBtn.addEventListener('click', showUploadModal);
+            openUploadModalIcon.addEventListener('click', showUploadModal);
+            closeUploadModal.addEventListener('click', closeUploadModalHandler);
+            uploadModal.addEventListener('click', (e) => {
+                if (e.target === uploadModal) {
+                    closeUploadModalHandler();
+                }
+            });
+            
+            document.querySelector('.close-modal').addEventListener('click', closeAuthModal);
+            authModal.addEventListener('click', (e) => {
+                if (e.target === authModal) {
+                    closeAuthModal();
+                }
+            });
+            
+            // Close quality selector when clicking outside
+            document.addEventListener('click', () => {
+                if (qualitySelector) {
+                    qualitySelector.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
